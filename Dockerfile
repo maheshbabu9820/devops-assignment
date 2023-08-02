@@ -1,3 +1,4 @@
+
 # Stage 1: Build the application
 FROM node:16 as builder
 
@@ -33,8 +34,5 @@ EXPOSE 3000
 CMD ["node", "./dist/apps/nft-bridge/main.js"]
 
 
-# Build the project
-RUN nx build nft-bridge
 
-# Set the command to run the application
-CMD ["node", "./dist/apps/nft-bridge/main.js"]
+
