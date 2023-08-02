@@ -1,22 +1,37 @@
-# Use the official Node.js image as the base image
+# Stage 1: Build the application
+FROM node:16 as builder
+
+# Set the working directory inside the container
+WORKDIR /app
+
+# Copy package.json and package-lock.json to the container
+COPY package*.json ./
+
+# Install application dependencies
+RUN npm install
+
+# Copy the rest of the application code to the container
+COPY . .
+
+# Build the application
+RUN npx nx build nft-bridge
+
+# Stage 2: Create the final image
 FROM node:16
 
 # Set the working directory inside the container
 WORKDIR /app
 
-# Copy the application source code to the container's working directory
-COPY . /app
+# Copy the build artifacts from the builder stage
+COPY --from=builder /app/dist/apps/nft-bridge ./dist/apps/nft-bridge
+COPY --from=builder /app/node_modules ./node_modules
 
-# Install application dependencies
-RUN npm install
-RUN npm install -g @nrwl/cli
-RUN npm install npx
+# Expose the port used by the application (if needed)
+EXPOSE 3000
 
-# Check linting
-RUN npx nx run nft-bridge:lint
+# Set the command to run the application
+CMD ["node", "./dist/apps/nft-bridge/main.js"]
 
-# Run e2e tests
-# RUN npx jest
 
 # Build the project
 RUN nx build nft-bridge
