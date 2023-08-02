@@ -9,6 +9,8 @@ COPY . /app
 
 # Install application dependencies
 RUN npm install
+RUN npm install -g @nrwl/cli
+RUN npm install npx
 
 # Check linting
 RUN npx nx run nft-bridge:lint
