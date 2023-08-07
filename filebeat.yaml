@@ -129,10 +129,10 @@ spec:
           runAsUser: 0
         resources:
           limits:
-            memory: 500Mi
+            memory: 800Mi
           requests:
-            cpu: 500m
-            memory: 100Mi
+            cpu: 600m
+            memory: 300Mi
         volumeMounts:
         - name: config
           mountPath: /etc/filebeat.yml
