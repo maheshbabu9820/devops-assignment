@@ -16,7 +16,7 @@ spec:
     spec:
       containers:
         - name: devops-container
-          image: "${ECR_REPOSITORY}:${BUILD_NUMBER}"
+          image: public.ecr.aws/f9v1n6a5/devops-assesment:102
           ports:
             - containerPort: 3000
           env:
