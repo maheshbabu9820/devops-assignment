@@ -1,8 +1,9 @@
----
 apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: devops-deployment
+  labels:
+    app: nft-bridge
 spec:
   replicas: 2
   selector:
@@ -17,9 +18,17 @@ spec:
         - name: devops-container
           image: ${ECR_REPOSITORY}:${BUILD_NUMBER}
           ports:
-             - containerPort: 3000
-               protocol: TCP
-      envFrom:
-        - configMapRef:
-            name: my-config
+            - containerPort: 3000
+          env:
+            - name: ECR_REPOSITORY
+              valueFrom:
+                configMapKeyRef:
+                  name: my-config
+                  key: ECR_REPOSITORY
+            - name: BUILD_NUMBER
+              valueFrom:
+                configMapKeyRef:
+                  name: my-config
+                  key: BUILD_NUMBER
+
 
