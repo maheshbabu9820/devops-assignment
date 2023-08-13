@@ -1,0 +1,7 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: my-config
+data:
+  ECR_REPOSITORY: public.ecr.aws/f9v1n6a5/devops-assesment
+  BUILD_NUMBER: "CHANGE_ME"
