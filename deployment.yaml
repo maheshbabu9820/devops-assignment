@@ -15,7 +15,7 @@ spec:
     spec:
       containers:
         - name: devops-container
-          image: public.ecr.aws/a8e5l7p4/devops:V2
+          image:  $ECR_REPOSITORY:$BUILD_NUMBER
           ports:
              - containerPort: 3000
                protocol: TCP
